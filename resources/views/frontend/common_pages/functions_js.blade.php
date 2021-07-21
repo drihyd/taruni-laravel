@@ -1,9 +1,4 @@
 <script>
-    $('#zoom_01').elevateZoom({
-    gallery:'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
-       }); 
-</script>
-<script>
       $('.banner-slider').slick({
             slidesToShow: 2, 
 
@@ -141,11 +136,12 @@
 		   
 		
 
-$(document).ajaxSend(function(){
+/* $(document).ajaxSend(function(){
+	
+
 	$.LoadingOverlay("show",
 	{
-	//image       : "",
-	//fontawesome : "fa fa-cog fa-spin",
+
 	size:4,
 	background  : "rgba(253, 236, 237, 0.5)"
 
@@ -154,7 +150,7 @@ $(document).ajaxSend(function(){
 	);
 	
 	
-	});
+	}); */
 
 		
 function update_cart(itemid,qty,unitprice){
@@ -207,9 +203,7 @@ function update_cart(itemid,qty,unitprice){
 
 
 
-$(document).ajaxStop(function(){
-  $.LoadingOverlay("hide");
-});
+
  </script>
  
  <script>
@@ -266,3 +260,212 @@ $(document).ajaxStop(function(){
         });
 		 });
     </script>
+	
+	<script>
+	
+	$(".js-range-slider").ionRangeSlider({
+        type: "double",
+        min: 1,
+        max: 10000,
+        from: 1,
+        to: 10000,
+        grid: true
+    });
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	</script>
+	
+		<script>
+		
+		
+	$("#ajaxfilter").change(function(e) {
+		
+		
+
+	 toastr.options = {
+          "closeButton": true,
+          "newestOnTop": true,
+          "positionClass": "toast-top-right"
+        };
+			var element = this;
+			var heightPreserve = $("#products-grid").closest(".col-xs-12").css('height');
+			
+			$("#products-grid").append("<div style='width: 100%; position: absolute; left: 0; text-align: center; top: 200px;margin: 0 auto;'><i class='products-loader fa fa-spinner fa-spin'></i></div>");
+			
+			var filters = [];
+			var postData = $(this).serializeArray();
+			
+			
+		
+	
+
+			$.each(postData, function(key, value) {
+				if(filters[value['name']] == undefined){
+					filters[value['name']] = [];
+				}
+				filters[value['name']].push(value['value']);
+			});
+
+			if (searchTerm) { 
+				filters['searchTerm'] = searchTerm;
+			}
+
+			var sizes = '';
+			var searchTerm = '';
+			var categories = '';
+			var colors = '';
+			var fabrics = '';
+			var tags = '';
+			var cuts = '';
+			var minprice = '';
+			var maxprice = '';
+				var currency = 'usd';
+					     
+			var sort_by = '';
+			
+			//queryString = window.location.search;
+			
+			var temp = {};
+
+
+
+        value = $("#rangePrimary").prop("value").split(";");
+		
+        var minprice = value[0];
+        var maxprice = value[1];
+		
+
+			var queryString = '';
+			if(queryString == '') {
+				queryString = '?';
+			}		
+			
+			if(filters['searchTerm'] !== undefined) {
+				searchTerm = filters['searchTerm'].join(',');
+				temp['searchTerm'] = searchTerm;
+				// queryString += '&searchTerm=' + searchTerm;
+			}
+			
+			if(filters['categories[]'] !== undefined) {
+				categories = filters['categories[]'].join(',');
+				temp['categories'] = categories;
+				// queryString += '&categories=' + categories;
+			}
+			
+			if(filters['sizes[]'] !== undefined) {
+				sizes = filters['sizes[]'].join(',');
+				temp['sizes'] = sizes;
+				// queryString += '&sizes=' + sizes;
+			}
+			
+			if(filters['colors[]'] !== undefined) {
+				colors = filters['colors[]'].join(',');
+				temp['colors'] = colors;
+				// queryString += '&colors=' + colors;
+			}
+			
+			
+			
+		
+			if(filters['fabrics[]'] !== undefined) {
+				fabrics = filters['fabrics[]'].join(',');
+				temp['fabrics'] = fabrics;
+				// queryString += '&fabrics=' + fabrics;
+			}
+			
+			if(filters['cuts[]'] !== undefined) {
+				cuts = filters['cuts[]'].join(',');
+				temp['cuts'] = cuts;
+				// queryString += '&cuts=' + cuts;
+			}
+			if(filters['tags[]'] !== undefined) {
+				tags = filters['tags[]'].join(',');
+				temp['tags'] = tags;
+				// queryString += '&tags=' + tags;
+			}
+			
+			
+			
+			if(filters['my_range'] !== undefined) {
+				minprice = filters['my_range'].join(',');
+				temp['minprice'] = minprice;
+				// queryString += '&minprice=' + minprice;
+			}
+			
+			if(filters['my_range'] !== undefined) {
+				maxprice =  filters['my_range'].join(',');
+				temp['maxprice'] = maxprice;
+				// queryString += '&maxprice=' + maxprice;
+			}
+			
+			if(filters['currency'] !== undefined) {
+				currency = filters['currency'].join(',');
+				// queryString += '&currency=' + maxprice;
+			}
+
+			if(filters['currency'] !== undefined) {
+				currency = filters['currency'].join(',');				
+				// queryString += '&currency=' + maxprice;
+			}
+
+			if(filters['sort_by'] !== undefined) {
+				sort_by = filters['sort_by'];	
+				temp['sort_by'] = sort_by;			
+				// queryString += '&currency=' + maxprice;
+			}
+			
+			if(filters['cat_slug'] !== undefined) {
+				cat_slug = filters['cat_slug'];	
+				temp['cat_slug'] = cat_slug;			
+				// queryString += '&currency=' + maxprice;
+			}
+
+			// temp['currency'] = currency;
+		
+			queryString = '?'+jQuery.param( temp );
+			
+
+			// console.log(window.location.hostname + window.location.pathname + queryString);
+			window.history.pushState('obj', 'newtitle', window.location.pathname + queryString);
+			
+			var formURL = $(this).attr("action");
+			$.ajax({
+				url : formURL,
+				type: "POST",
+				data : postData,			
+				success:function(data, textStatus, jqXHR) {		
+	
+
+					//console.log(data);
+					// console.log(data);
+					$("#products-area").html(data); 
+					//adjust_productsGrid(); 
+					//$("#products-grid").append("<div style='position: absolute; left: 0; width: 100%; text-align: center; top: 200px;'><i class='products-loader fa fa-spinner fa-spin'></i></div>");
+					//$(".products-loader").fadeOut();
+					//$.LoadingOverlay("hide");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					//console.log(errorThrown);
+					//alert('Not available');
+					toastr.error('Not available');
+					//$(this.form).empty();
+					//$(this.form).html(errorThrown);
+				}
+			});
+			e.preventDefault(); //STOP default action
+		});
+</script>
+
+<script>
+
+
+
+</script>

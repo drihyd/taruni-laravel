@@ -34,9 +34,15 @@ Route::get('/', function () {
 });
 
 
-Route::get('/category/{slug?}', [CategoriesController::class,'cat_products']);
-Route::get('/product/{slug?}', [ProductsController::class,'show_product']);
+Route::any('/category/{slug?}', [CategoriesController::class,'cat_products']);
+Route::any('/product/{slug?}', [ProductsController::class,'show_product']);
 
+
+
+
+
+
+Route::any('products-search', [ProductsController::class,'filter_products'])->name('products.search');
 
 Route::get('/payment', [ProductsController::class,'show_payments']);
 

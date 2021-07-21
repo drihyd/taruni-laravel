@@ -2,31 +2,27 @@
 @section('title', $pageTitle)
 @section('content')
 
-<section>
+<section >
       <div class="container">
+	  
+	  
         <div class="row">
-          <div class="col-sm-6">
-            <div class="row">
-			
-			@if($Products)				
-				@foreach ($Products as $product)
-				@foreach ($product->images as $pimg)		
-				<div class="col-6 mb-3">
-				<img src="{{env('BASE_URL').$product->pcode.'_'.$loop->iteration.'.jpg'}}" alt="product image" class="img-fluid">
-				</div>             
-				@endforeach			  
-				@endforeach			  
-			  @else			  
-			  @endif
-            </div>
+		
+		
+		
+          <div class="col-sm-6">		  
+		 
+         @include('frontend.common_pages.product_zoom_gallery')
           </div>
-          <div class="col-sm-6">
+		  
+		  
+          <div class="col-sm-6" >
 		  
 		  
 		  @if($Products)
 			@foreach ($Products as $product)
   		  
-            <div class="wrapper">
+            <div class="wrapper" >
               <p class="small mb-1">Product Code: {{Str::ucfirst($product->pcode)}}</p>
               <h3>INR {{$product->pprice}}.00/-</h3>
               <div class="product-details">
@@ -58,7 +54,7 @@
 					@foreach ($Products as $product)
 					@foreach ($product->images as $pimg)		
 					  <label class="btn size-btn">
-                        <input required type="radio" name="sku" value="{{$pimg->size}}" id="size-s" autocomplete="off"> {{Str::upper(str_replace('-', '_',trim($pimg->size)))}}                
+                        <input required type="radio" name="sku" value="{{$pimg->size}}" id="size-s" autocomplete="off"> {{Str::upper(str_replace('_', '-',trim($pimg->size)))}}                
                       </label>           
 					@endforeach			  
 					@endforeach			  
@@ -143,7 +139,7 @@
 
 					 <button type="submit" class="btn btn-submit"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
                     <a href="{{ route('wishlist.store', Crypt::encryptString($product->pid))}}" class="btn btn-submit"><i class="fas fa-heart"></i> Wishlist</a>
-                    <a href="#" class="btn btn-submit">Notify Me</a>
+                   <!-- <a href="#" class="btn btn-submit">Notify Me</a>-->
 					  </div>
 					  
 					
@@ -232,6 +228,9 @@
                 <img src="{{ URL::to('images/look-1.jpg')}}"" alt="product" class="img-fluid mb-3" width="100%">
               </div>
               <p class="text-black"><b>INR 2500/-</b></p>
+			  
+			  
+			  
               <p class="small">Mustard Linen Silk Anarkali Gold Resham Work and Contrast Banaras Bandini Dupatta</p>
             </div>
           </div>
@@ -298,6 +297,10 @@
       <div class="container">
         <h3>Products You May Also Like</h3>
         <div class="productslike-slider mt-4">
+		
+		
+		
+		
           <div>
             <div class="look-wrapper">
                 <div class="productsmaylike product-img">

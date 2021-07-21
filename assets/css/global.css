@@ -723,11 +723,11 @@ div:focus{
 /*Product Single page CSS Begin*/
 
 .btn.size-btn{
-    border: 2px solid #ddd;
+  border: 1px solid #ddd;
     border-radius: 0;
-    width: 40px;
-    height: 28px;
-    padding: 3px 0px;
+    width: 46px;
+    height: 25px;
+    padding: 2px 0px;
     font-size: 12px;
     margin-right: 5px;
 }

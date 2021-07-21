@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Products;
 use Illuminate\Support\Facades\DB;
+use App\Models\Sku;
 class CategoriesController extends Controller
 {
     /**
@@ -24,28 +25,36 @@ class CategoriesController extends Controller
 	
 		
 		$pageTitle=Str::ucfirst($Categories->name??'');
-		if($Categories){			
-		$Products=Products::select('products.*')	
-		->where("products.cat_id",$Categories->id)		
-		->get();
+		if($Categories){
+
+
+
+			
+		$Products=Sku::select('products.*','skus.price_inr as pprice','skus.product_id as productid')	
+		->leftjoin('products', 'products.id','=','skus.product_id')
+		->leftjoin('categories', 'categories.id','=','products.cat_id')
+		->where("products.cat_id",$Categories->id)
+		->where('skus.price_inr', '>',0)	
+		->orderBy('skus.price_inr','ASC')->get()->unique('name');
 		
 		
-			foreach ($Products as $key => $value) {
+		/* 	foreach ($Products as $key => $value) {
 			$Products[$key]->images = DB::table('skus')->select('skus.price_inr as pprice')
 			->where('skus.product_id', $value->id)
 			->where('skus.price_inr', '>',0)
 			->limit(1)
 			->get();
 			}	
-		
-		
+		 */
+		$catslug=$slug;
 		
 		}else{
 			$Products='';
+			$catslug=='';
 		}
 		
-	
-		return view('frontend.products', compact('pageTitle','Products'));
+
+		return view('frontend.products', compact('pageTitle','Products','catslug'));
     }   
 
 

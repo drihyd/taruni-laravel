@@ -15,11 +15,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 @stack('styles')<!-- To include style links -->
+
+
 <link rel="stylesheet" type="text/css" href="{{ URL::to('assets/css/global.css') }}"> 
 <link rel="stylesheet" type="text/css" href="{{ URL::to('assets/css/login.css') }}"> 
 <link rel="stylesheet" type="text/css" href="{{ URL::to('assets/css/myaccount.css') }}"> 
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+
+
+
+  <link rel="stylesheet" href="{{ URL::to('assets/css/main.css') }}">
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+
+<!--Plugin CSS file with desired skin-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+    
+
+    
+    <!--Plugin JavaScript file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <style>
 .overlay{
     display: none;
@@ -42,6 +62,11 @@ body.loading .overlay{
 </style>
 
 
+
+
+
+  
+  
 </head>
 <body class="bg-homebrand">
 <!--<body class="{{ (request()->is('/')) ? 'bg-homebrand' : '' }}">-->
@@ -52,7 +77,7 @@ body.loading .overlay{
 </div>
 @include('frontend.common_pages.footer')
 @stack('scripts') <!-- To include script links -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
@@ -60,6 +85,13 @@ body.loading .overlay{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <script src="{{URL::to('assets/scripts/zoom-image.js')}}"></script>
+  <script src="{{URL::to('assets/scripts/main.js') }}"></script>
+  
+
+
 @include('frontend.common_pages.functions_js')
 
 <script>
